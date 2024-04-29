@@ -12,13 +12,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 
 from datetime import timedelta
-import os
 from pathlib import Path
-# https://pypi.org/project/python-dotenv/
-from dotenv import load_dotenv
-load_dotenv()
 
+import os
 
+# https://pypi.org/project/environs/#install
+from environs import Env  # read .env file, if it exists 
+env = Env()
+Env.read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,15 +30,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY'),
+SECRET_KEY = env('SECRET_KEY')
+print(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'project.onrender.com',
-                  '127.0.0.1',
-                  'localhost'
-]
+ALLOWED_HOSTS = [ '127.0.0.1','localhost']
 
 
 # Application definition
@@ -265,7 +264,7 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'UPDATE_LAST_LOGIN': True,
-    'SIGNING_KEY': os.getenv('SIGNING_KEY')
+    'SIGNING_KEY': env('SIGNING_KEY')
 }
 
 
@@ -286,7 +285,7 @@ SWAGGER_SETTINGS = {
 
 # https://dashboard.stripe.com/test/developers
 ######################################### STRIPE_SECRET SETTINGS ##############################################
-STRIPE_SECRET = os.getenv('STRIPE_SECRET')
+STRIPE_SECRET = env('STRIPE_SECRET')
 # Publishable key = pk_test_51NRKjDGdnvcxF6p4l2MGWNCo1bzJy3ptn8k71plHXu4KnEcE5N3tIqEXUd02iIGaYvXd6UXz0qtBi5No2UxsfkxM00LxmdpuD7
 # Secret key = sk_test_51NRKjDGdnvcxF6p4umZSGtNuUPukxqkz1oesHmYDLVAsAOV2z6ivV1JguSr5XXGuM9suEH4V7ehh5KN5P2c4dLjZ00m16lShkL
 
@@ -295,12 +294,12 @@ STRIPE_SECRET = os.getenv('STRIPE_SECRET')
 ######################################### Twilio Account SID and Auth Token settings ##############################################
 # Twilio Account SID and Auth Token
 
-TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
+TWILIO_ACCOUNT_SID = env('TWILIO_ACCOUNT_SID')
 
-TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
+TWILIO_AUTH_TOKEN = env('TWILIO_AUTH_TOKEN')
 
 # Twilio phone number used for sending SMS messages
-TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
+TWILIO_PHONE_NUMBER = env('TWILIO_PHONE_NUMBER')
 
 
 

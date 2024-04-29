@@ -7,7 +7,7 @@ from common import permissions as custom_permissions
 #https://www.django-rest-framework.org/api-guide/viewsets/#custom-viewset-base-classes
 from django_auto_prefetching import AutoPrefetchViewSetMixin
 
-# Not: category have no permission for update
+# Note: category have no permission for update
 class CategoryViewSet(viewsets.mixins.CreateModelMixin, mixins.ListModelMixin, 
                       mixins.RetrieveModelMixin,mixins.DestroyModelMixin, viewsets.GenericViewSet):                      
     queryset = Category.objects.all()

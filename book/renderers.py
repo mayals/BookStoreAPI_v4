@@ -22,7 +22,7 @@ class CustomRenderer(JSONRenderer):
                                         "status": "Error",
                                         "data": data,
                                     }
-                                 )
+                                )
         else:
             response = json.dumps(
                                     {
@@ -30,5 +30,5 @@ class CustomRenderer(JSONRenderer):
                                         "data": data,
                                     },
                                     cls=DjangoJSONEncoder
-                                 )
+                                )
         return response

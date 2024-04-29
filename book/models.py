@@ -37,7 +37,7 @@ class Category(models.Model):
 
 
 class Publisher(models.Model):
-    id            = ShortUUIDField(primary_key=True, unique=True, length=6, max_length=6, editable=False)
+    id             = ShortUUIDField(primary_key=True, unique=True, length=6, max_length=6, editable=False)
     name           = models.CharField(max_length=100, unique=True, null=True, blank=False)
     slug           = models.SlugField(max_length=120, blank=True, null=True)
     address        = models.CharField(max_length=50, null=True, blank=True)
@@ -53,7 +53,7 @@ class Publisher(models.Model):
 
     def save(self, *args, **kwargs): 
             self.slug = slugify(self.name)
-            super().save(*args, **kwargs)  #                                 # Call the "real" save() method.   
+            super().save(*args, **kwargs)   # Call the "real" save() method.   
 
     def get_absolute_url(self):
         return reverse('publisher_detail', kwargs = {'slug':self.slug})   # view_name='{model_name}-detail'

@@ -19,17 +19,17 @@ class CategorySerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Category
-        fields = ['id', 'name', 'slug', 'icon', 'created_at','books_category']
+        fields = ['id', 'name', 'slug', 'icon', 'created_at', 'books_category']
         extra_kwargs = {
                     'name' :  {'required' : True, 'unique':True},
                     'id'   :  {'read_only': True },
                     'slug' :  {'read_only': True },
-                   'books_category':{'read_only':True},
+                    'books_category' : {'read_only':True},
         }
 
     def get_books_category(self, obj):
-            books_category = Book.category.all().filter(category=self)
-            return books_category
+        books_category = Book.category.all().filter(category=self)
+        return books_category
 
 
 
